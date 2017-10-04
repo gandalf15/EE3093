@@ -1,10 +1,10 @@
 // Author: Marcel Zak Student ID: 51442568
 #include<stdio.h>
 #include<stdlib.h>
-#define BUFF_SIZE 256 // buffer size for one line
+#define BUFF_SIZE 256 // buffer size for one line user input
 
 // create structure for complex number
-// re is real part and im is imaginary part
+// 're' is real part and 'im' is imaginary part
 struct ComplexNum {
 	double re, im;
 };
@@ -12,7 +12,7 @@ struct ComplexNum {
 // define type of ComplexNum
 typedef struct ComplexNum ComplexNum;
 
-// declare functions
+// functions prototypes
 double* get_double(double *num);
 int* get_int(int *num);
 struct ComplexNum* complex_add(struct ComplexNum *f_num, struct ComplexNum *s_num);
@@ -29,10 +29,11 @@ int main()
 	//define option variable 
 	int option = 0;
 
-	// ask user which operatin to do and get two complex numbers
+	// promp the user what to do and get two complex numbers
 	printf("\nCalculator for complex numbers by Marcel Zak ");
 	printf("\nSelect mathematical operation");
 	printf("\n\n1-Addition\n2-Subtraction\n3-Multiplication\n4-Division\n\n");
+	// check if the selected number is within the range, if not repeat
 	while(option == 0){
 		get_int(&option);
 		if (option > 4 || option < 1){
@@ -81,10 +82,13 @@ int main()
 
 // function get_int which reads safely the user input
 int* get_int(int *num) {
+	// define array of size BUFF_SIZE for the use input
 	char line[BUFF_SIZE];
 	int i;
+	// gets the line and check if it is correct value
 	if (fgets(line, sizeof(line), stdin)) {
 		if (1 == sscanf(line, "%d", &i)) {
+			// it was correct and it is safe to work with i
 			*num = i;
 			return num;
 		}
@@ -97,10 +101,13 @@ int* get_int(int *num) {
 
 // function get_double which reads safely the user input
 double* get_double(double *num) {
+	// define array of size BUFF_SIZE for the use input
 	char line[BUFF_SIZE];
 	double i;
+	// gets the line and check if it is correct value
 	if (fgets(line, sizeof(line), stdin)) {
 		if (1 == sscanf(line, "%lf", &i)) {
+			// it was correct and it is safe to work with i
 			*num = i;
 			return num;
 		}
@@ -111,7 +118,9 @@ double* get_double(double *num) {
 	}
 }
 
-// function for adition of complex numbers
+// function for adition of two complex numbers
+// input: two pointers to struct ComplexNum
+// output: pointer to the result struct ComplexNum
 ComplexNum *complex_add(ComplexNum *f_num, ComplexNum *s_num) {
 	ComplexNum *result = malloc(sizeof(ComplexNum));
 	result->re = f_num->re + s_num->re;
@@ -119,7 +128,9 @@ ComplexNum *complex_add(ComplexNum *f_num, ComplexNum *s_num) {
 	return result;
 }
 
-// function for subtraction of complex numbers
+// function for subtraction of two complex numbers
+// input: two pointers to struct ComplexNum
+// output: pointer to the result  struct ComplexNum
 ComplexNum *complex_sub(ComplexNum *f_num, ComplexNum *s_num) {
 	ComplexNum *result = malloc(sizeof(ComplexNum));
 	result->re = f_num->re - s_num->re;
@@ -127,7 +138,9 @@ ComplexNum *complex_sub(ComplexNum *f_num, ComplexNum *s_num) {
 	return result;
 }
 
-// function for multiplication of complex numbers
+// function for multiplication of two complex numbers
+// input: two pointers to struct ComplexNum
+// output: pointer to the result  struct ComplexNum
 ComplexNum *complex_mul(ComplexNum *f_num, ComplexNum *s_num) {
 	ComplexNum *result = malloc(sizeof(ComplexNum));
 	double f,o,i,l;
@@ -140,7 +153,9 @@ ComplexNum *complex_mul(ComplexNum *f_num, ComplexNum *s_num) {
 	return result;
 }
 
-// function for division of complex numbers
+// function for division of two complex numbers
+// input: two pointers to struct ComplexNum
+// output: pointer to the result  struct ComplexNum
 ComplexNum *complex_div(ComplexNum *f_num, ComplexNum *s_num) {
 	ComplexNum *result = malloc(sizeof(ComplexNum));
 	ComplexNum *temp;
