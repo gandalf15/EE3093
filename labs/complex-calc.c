@@ -1,4 +1,4 @@
-/*first practical*/
+// Author: Marcel Zak Student ID: 51442568
 #include<stdio.h>
 #include<stdlib.h>
 #define BUFF_SIZE 256 // buffer size for one line
@@ -31,8 +31,8 @@ int main()
 
 	// ask user which operatin to do and get two complex numbers
 	printf("\nCalculator for complex numbers by Marcel Zak ");
-	printf("\nSelect desired mathematical operation");
-	printf("\n1-Addition\n2-Subtraction\n3-Multiplication\n4-Division\n");
+	printf("\nSelect mathematical operation");
+	printf("\n\n1-Addition\n2-Subtraction\n3-Multiplication\n4-Division\n\n");
 	while(option == 0){
 		get_int(&option);
 		if (option > 4 || option < 1){
@@ -54,25 +54,25 @@ int main()
 		// Addition of two complex numbers
 		case 1:
 			r_num = complex_add(&f_num, &s_num);
-			printf("\n\n(%lf %lfi) + (%lf %lfi) = (%lf %lfi)\n\n", 
+			printf("\n\n(%g%+gi) + (%g%+gi) = (%g%+gi)\n\n", 
 					f_num.re, f_num.im, s_num.re, s_num.im, r_num->re, r_num->im);
 			break;
 		// Subtraction of two complex numbers
 		case 2:
 			r_num = complex_sub(&f_num, &s_num);
-			printf("\n\n(%lf %lfi) - (%lf %lfi) = (%lf %lfi)\n\n", 
+			printf("\n\n(%g%+gi) - (%g%+gi) = (%g%+gi)\n\n", 
 					f_num.re, f_num.im, s_num.re, s_num.im, r_num->re, r_num->im);
 			break;
 		// Multiplication of two complex numbers
 		case 3:
 			r_num = complex_mul(&f_num, &s_num);
-			printf("\n\n(%lf %lfi) * (%lf %lfi) = (%lf %lfi)\n\n", 
+			printf("\n\n(%g%+gi) * (%g%+gi) = (%g%+gi)\n\n", 
 					f_num.re, f_num.im, s_num.re, s_num.im, r_num->re, r_num->im);
 			break;
 		// Division of two complex numbers
 		case 4:
 			r_num = complex_div(&f_num, &s_num);
-			printf("\n\n(%lf %lfi) / (%lf %lfi) = (%lf %lfi)\n\n", 
+			printf("\n\n(%g%+gi) / (%g%+gi) = (%g%+gi)\n\n", 
 					f_num.re, f_num.im, s_num.re, s_num.im, r_num->re, r_num->im);
 			break;
 	}
