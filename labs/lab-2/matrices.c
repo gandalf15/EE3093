@@ -57,12 +57,13 @@ int main ()
 	get_matrix_val(&m2);	
 	
 	print_matrix(&m1);
-	printf("\n\n");
+	printf("\n\n    X\n");
 	print_matrix(&m2);
 	
 	Matrix *m3 = multiply_matrices(&m1, &m2);
-	printf("\nis equal\n");
+	printf("\n\nProduct Matrix: \n");
 	print_matrix(m3);
+	printf("\n\n");
 	
 	return 0;
 }
@@ -163,7 +164,7 @@ Matrix* get_matrix_val(Matrix *m) {
 	printf("\nPlease enter the values for each position:\n");
 	for (int i = 0; i < m->rows; i++) {
 		for (int j = 0; j < m->cols; j++) {
-			printf("\nRow %d Column %d value: ", i, j);
+			printf("\nRow %d Column %d value: ", i+1, j+1);
 			get_double(&m->values[i][j]);
 		}
 	}
@@ -173,12 +174,12 @@ Matrix* get_matrix_val(Matrix *m) {
 // function for printing a matrix
 int print_matrix (Matrix *m) {
 	for (int i = 0; i < m->rows; i++) {
-		printf("\n");
+		printf("\n|");
 		for (int j = 0; j < m->cols; j++) {
-			printf("%g ", m->values[i][j]);
+			printf(" %g ", m->values[i][j]);
+			if (j == m->cols-1) printf("|");
 		}
 	}
-	printf("\n");
 	return 0;
 }
 
