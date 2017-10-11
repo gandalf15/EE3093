@@ -28,7 +28,6 @@ int main ()
 {
 	// deflare variables for matrices
 	Matrix m1, m2;
-	Matrix *m3;
 	// define variables
 	int option = 0;
 
@@ -48,7 +47,7 @@ int main ()
 			option = 1;
 		}
 	}
-
+		
 	init_matrix(&m1);
 	init_matrix(&m2);
 	
@@ -61,9 +60,10 @@ int main ()
 	printf("\n\n");
 	print_matrix(&m2);
 	
-	m3 = multiply_matrices(&m1, &m2);
+	Matrix *m3 = multiply_matrices(&m1, &m2);
 	printf("\nis equal\n");
 	print_matrix(m3);
+	
 	return 0;
 }
 
@@ -153,7 +153,7 @@ Matrix* get_matrix_dim(Matrix *m) {
 // input is matrix pointer and output is matrix pointer
 Matrix* init_matrix(Matrix *m) {
 	m->values = calloc(m->rows,sizeof(double*));
-	for (int i = 0; i < m->rows; i++) m->values[i] = calloc(m->cols,sizeof(int));
+	for (int i = 0; i < m->rows; i++) m->values[i] = calloc(m->cols,sizeof(double));
 	return m;
 }
 
@@ -191,7 +191,7 @@ Matrix* multiply_matrices (Matrix *m1, Matrix *m2) {
 	for (int i = 0; i < m1->rows; i++) { 
 		for (int j = 0; j < m2->cols; j++) {
 			for (int k = 0; k < m2->rows; k++) {
-				m3->values[i][j] = 	m3->values[i][j] + m1->values[i][k] * m2->values[k][j];
+				m3->values[i][j] +=  m1->values[i][k] * m2->values[k][j];
 			}
 		}
 	}
