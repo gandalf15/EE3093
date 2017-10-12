@@ -23,16 +23,17 @@ Matrix* get_matrix_val (Matrix *m);
 int print_matrix (Matrix *m);
 Matrix* multiply_matrices (Matrix *m1, Matrix *m2);
 
-// main function
+// main function returns 0 if everything is ok
 int main ()
 {
 	// deflare variables for matrices
 	Matrix m1, m2;
-	// define variables
+	// define variable
 	int option = 0;
 
 	printf("\nMatrices multiplication\nAuthor: Marcel Zak\n\n");
-	
+	// get dimensions of matrices
+	// check if they can be multiplied
 	while (option == 0) {
 		printf("\nFIRST MATRIX\n");
 		get_matrix_dim(&m1);
@@ -47,19 +48,19 @@ int main ()
 			option = 1;
 		}
 	}
-		
+	// initialize matrix values to 0s based on dimensions from the user
 	init_matrix(&m1);
 	init_matrix(&m2);
-	
+	//get values of matrices from the user
 	printf("\nFIRST MATRIX\n");
 	get_matrix_val(&m1);
 	printf("\nSECOND MATRIX\n");
 	get_matrix_val(&m2);	
-	
+	// print matrices on the screen
 	print_matrix(&m1);
 	printf("\n\n    X\n");
 	print_matrix(&m2);
-	
+	// multiply matrices and print it on the screen
 	Matrix *m3 = multiply_matrices(&m1, &m2);
 	printf("\n\nProduct Matrix: \n");
 	print_matrix(m3);
@@ -69,7 +70,7 @@ int main ()
 }
 
 // function get_double reads safely the user input
-// and return pointer to double
+// input is pointer to int and output is the same pointer
 double* get_double(double *num) {
 	// define array of size BUFF_SIZE for the user input
 	char line[BUFF_SIZE];
@@ -93,7 +94,7 @@ double* get_double(double *num) {
 }
 
 // function get_int reads safely the user input
-// and return pointer to int
+// input is pointer to int and output is the same pointer
 int* get_int(int *num) {
 	// define array of size BUFF_SIZE for the user input
 	char line[BUFF_SIZE];
@@ -116,7 +117,7 @@ int* get_int(int *num) {
 }
 
 // function to get matrix dimensions from the user
-// input is pointer to Matrix and output is pointer to Matrix
+// input is pointer to Matrix and output is the same pointer
 Matrix* get_matrix_dim(Matrix *m) {
 	int m_rows, m_cols, option;
 	option = 0;
@@ -151,7 +152,7 @@ Matrix* get_matrix_dim(Matrix *m) {
 }
 
 // function which initialize matrix to 0s
-// input is matrix pointer and output is matrix pointer
+// input is pointer to Matrix and output is the same pointer
 Matrix* init_matrix(Matrix *m) {
 	m->values = calloc(m->rows,sizeof(double*));
 	for (int i = 0; i < m->rows; i++) m->values[i] = calloc(m->cols,sizeof(double));
@@ -159,7 +160,7 @@ Matrix* init_matrix(Matrix *m) {
 }
 
 // function to get matrix values from the user
-// input is pointer to Matrix and output is pointer to Matrix
+// input is pointer to Matrix and output is the same pointeryy
 Matrix* get_matrix_val(Matrix *m) {
 	printf("\nPlease enter the values for each position:\n");
 	for (int i = 0; i < m->rows; i++) {
@@ -172,6 +173,7 @@ Matrix* get_matrix_val(Matrix *m) {
 }
 
 // function for printing a matrix
+// input is pointer to Matrix and output is 0 if everything is ok
 int print_matrix (Matrix *m) {
 	for (int i = 0; i < m->rows; i++) {
 		printf("\n|");
@@ -184,6 +186,7 @@ int print_matrix (Matrix *m) {
 }
 
 // function for matrix multiplication
+// input is pointer to Matrix and output is Matrix pointer to result
 Matrix* multiply_matrices (Matrix *m1, Matrix *m2) {
 	Matrix *m3 = malloc(sizeof(Matrix));
 	m3->rows = m1->rows;
