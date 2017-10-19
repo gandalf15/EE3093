@@ -1,0 +1,6 @@
+data = dlmread('output.txt');
+x = data(:,1);
+y = data(:,2);
+plot(x,y,'color','b');hold on;
+x1 = exp(-x);
+plot(x,x1,'-.or');
