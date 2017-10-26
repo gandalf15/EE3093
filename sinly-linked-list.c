@@ -13,7 +13,7 @@ typedef struct Node Node;
 // function prototypes
 void insertNode (Node **head,DATA_TYPE value);
 void deleteNode (Node **head, DATA_TYPE value);
-Node* searchNode (Node *head, DATA_TYPE value);	// returns pointer to first node that contains the value
+Node* searchNode (Node **head, DATA_TYPE value);	// returns pointer to first node that contains the value
 void printList(Node *head); // it works only for char. 
 //If different DATA_TYPE is used printf placeholder must be changed.
 
@@ -30,13 +30,11 @@ int main ()
 	insertNode(&headNode, 'e');
 	printList(headNode);
 	printf("\nSearch for node with value c");
-	searchResult = searchNode(headNode, 'c');
-	printf("\n%c", searchResult->value);
-	deleteNode(&headNode, 'c');
-	printf("\nValue c was deleted.");
+	searchResult = searchNode(&headNode, 'c');
+	printf("\n%c\n", searchResult->value);
 	printList(headNode);
-	printf("\nDelete head of the list which is letter e");
-	deleteNode(&headNode, 'e');
+	printf("\nDelete head of the list which is letter c now");
+	deleteNode(&headNode, 'c');
 	printList(headNode);
 	return 0;
 }
@@ -64,10 +62,28 @@ void deleteNode (Node **dptr, DATA_TYPE value) {
 	}
 }
 
-Node* searchNode (Node *n, DATA_TYPE value) {
-	if (n == NULL) return NULL;
-	if (n->value == value) return n;
-	return searchNode (n->next, value);
+// it moves the searched node to the beginning of the list.
+// most recently used node is most likely to be used again.
+Node* searchNode (Node **head, DATA_TYPE value) {
+	Node *delNode;
+	Node **n = head;
+	while (*n != NULL && (*n)->value != value) {
+		n = &(*n)->next;
+	}
+	if ((*n) == NULL) return NULL;
+	if (*n != NULL) {
+		if (*n != *head) {
+			insertNode (head, (*n)->value);
+			delNode = *n;
+			*n = delNode->next;
+			free(delNode);
+			return *head;
+		}
+		else {
+			return *head;
+		}
+	}
+	return NULL;
 }
 
 void printList(Node *head) {
